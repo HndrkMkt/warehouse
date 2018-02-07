@@ -433,7 +433,7 @@ class TestResetPassword:
         assert result["form"] is form_inst
         assert form_class.calls == [
             pretend.call(
-                db_request.GET,
+                token=db_request.params['token'],
                 username=user.username,
                 full_name=user.name,
                 email=user.email,
@@ -489,7 +489,7 @@ class TestResetPassword:
         assert form_obj.validate.calls == [pretend.call()]
         assert form_class.calls == [
             pretend.call(
-                db_request.POST,
+                token=db_request.params['token'],
                 username=user.username,
                 full_name=user.name,
                 email=user.email,
